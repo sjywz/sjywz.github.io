@@ -2,7 +2,7 @@
 title: 中间件之array_reduce与call_user_func
 date: 2019-07-04 18:00:31
 tags:
-- php函数
+- php
 - js
 ---
  在社区看到[Laravel中间件,管道之面向切面编程](https://learnku.com/docs/laravel-core-concept/5.5/%E4%B8%AD%E9%97%B4%E4%BB%B6/3022)，介绍了中间件实现原理。主要的实现就两个函数：
