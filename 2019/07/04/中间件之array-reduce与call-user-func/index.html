@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="一记">
 <meta property="og:description" content="在社区看到Laravel中间件,管道之面向切面编程，介绍了中间件实现原理。主要的实现就两个函数：  call_user_func() 把第一个参数作为回调函数调用array_reduce() 用回调函数迭代地将数组简化为单一的值  单看手册这两个函数都很简单，我也都知道。对call_user_func()理解就停留在既然知道函数名，直接调用就行了，何必要参数传入作为回调函数调用，这不是多此一举么">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-09-09T07:58:45.224Z">
+<meta property="og:updated_time" content="2020-09-09T08:10:04.809Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="中间件之array_reduce与call_user_func">
 <meta name="twitter:description" content="在社区看到Laravel中间件,管道之面向切面编程，介绍了中间件实现原理。主要的实现就两个函数：  call_user_func() 把第一个参数作为回调函数调用array_reduce() 用回调函数迭代地将数组简化为单一的值  单看手册这两个函数都很简单，我也都知道。对call_user_func()理解就停留在既然知道函数名，直接调用就行了，何必要参数传入作为回调函数调用，这不是多此一举么">
@@ -22,27 +22,27 @@
     
         
           
-              <link rel="shortcut icon" href="/sjywz/images/favicon.ico">
+              <link rel="shortcut icon" href="/images/favicon.ico">
           
         
         
           
-            <link rel="icon" type="image/png" href="/sjywz/images/favicon-192x192.png" sizes="192x192">
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
           
         
         
           
-            <link rel="apple-touch-icon" sizes="180x180" href="/sjywz/images/apple-touch-icon.png">
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
           
         
     
     <!-- title -->
     <title>中间件之array_reduce与call_user_func</title>
     <!-- styles -->
-    <link rel="stylesheet" href="/sjywz/css/style.css">
+    <link rel="stylesheet" href="/css/style.css">
     <!-- persian styles -->
     
-      <link rel="stylesheet" href="/sjywz/css/rtl.css">
+      <link rel="stylesheet" href="/css/rtl.css">
     
     <!-- rss -->
     
@@ -59,11 +59,11 @@
     <span id="nav">
       <ul>
          
-          <li><a href="/sjywz/">Home</a></li>
+          <li><a href="/">Home</a></li>
          
-          <li><a href="/sjywz/about/">About</a></li>
+          <li><a href="/about/">About</a></li>
          
-          <li><a href="/sjywz/archives/">Writing</a></li>
+          <li><a href="/archives/">Writing</a></li>
         
       </ul>
     </span>
@@ -71,10 +71,10 @@
     <span id="actions">
       <ul>
         
-        <li><a class="icon" href="/sjywz/2019/07/07/大厂技术团/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        <li><a class="icon" href="/2019/07/07/大厂技术团/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
         
         
-        <li><a class="icon" href="/sjywz/2019/06/28/序/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        <li><a class="icon" href="/2019/06/28/序/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
         
         <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
         <!-- <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li> -->
@@ -137,7 +137,7 @@
       
     <div class="article-tag">
         <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/sjywz/tags/js/">js</a>, <a class="tag-link" href="/sjywz/tags/php/">php</a>
+        <a class="tag-link" href="/tags/js/">js</a>, <a class="tag-link" href="/tags/php/">php</a>
     </div>
 
 
@@ -165,11 +165,11 @@
     <div id="nav-footer" style="display: none">
       <ul>
          
-          <li><a href="/sjywz/">Home</a></li>
+          <li><a href="/">Home</a></li>
          
-          <li><a href="/sjywz/about/">About</a></li>
+          <li><a href="/about/">About</a></li>
          
-          <li><a href="/sjywz/archives/">Writing</a></li>
+          <li><a href="/archives/">Writing</a></li>
         
       </ul>
     </div>
@@ -218,11 +218,11 @@
     <nav>
       <ul>
          
-          <li><a href="/sjywz/">Home</a></li>
+          <li><a href="/">Home</a></li>
          
-          <li><a href="/sjywz/about/">About</a></li>
+          <li><a href="/about/">About</a></li>
          
-          <li><a href="/sjywz/archives/">Writing</a></li>
+          <li><a href="/archives/">Writing</a></li>
         
       </ul>
     </nav>
@@ -231,15 +231,15 @@
 
     </div>
     <!-- styles -->
-<link rel="stylesheet" href="/sjywz/lib/font-awesome/css/all.min.css">
-<link rel="stylesheet" href="/sjywz/lib/justified-gallery/css/justifiedGallery.min.css">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
 
     <!-- jquery -->
-<script src="/sjywz/lib/jquery/jquery.min.js"></script>
-<script src="/sjywz/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
 <!-- clipboard -->
 
-  <script src="/sjywz/lib/clipboard/clipboard.min.js"></script>
+  <script src="/lib/clipboard/clipboard.min.js"></script>
   <script type="text/javascript">
   $(function() {
     // copy-btn HTML
@@ -260,12 +260,22 @@
   })
   </script>
 
-<script src="/sjywz/js/main.js"></script>
+<script src="/js/main.js"></script>
 <!-- search -->
 
 <!-- Google Analytics -->
 
 <!-- Baidu Analytics -->
+
+    <script type="text/javascript">
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?29d4400c26dd103d094ce85ff8b8e3c9";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
 
 <!-- Disqus Comments -->
 

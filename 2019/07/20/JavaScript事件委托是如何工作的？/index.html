@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="一记">
 <meta property="og:description" content="原文链接：How JavaScript Event Delegation Works  事件委托有着充分的理由作为JavaScript中最热门的方法之一。事件委托避免你为每一个明确节点添加事件监听，与之代替的是添加事件到父节点。通过事件冒泡查找到匹配的子元素。基础概念相当简单，不过许多人并不理解事件委托是如何工作的。下面让我们通过一个基础的JavaScript示例来演示事件委托是如果工作的。 假">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-09-09T07:58:45.224Z">
+<meta property="og:updated_time" content="2020-09-09T08:10:04.809Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript事件委托是如何工作的？">
 <meta name="twitter:description" content="原文链接：How JavaScript Event Delegation Works  事件委托有着充分的理由作为JavaScript中最热门的方法之一。事件委托避免你为每一个明确节点添加事件监听，与之代替的是添加事件到父节点。通过事件冒泡查找到匹配的子元素。基础概念相当简单，不过许多人并不理解事件委托是如何工作的。下面让我们通过一个基础的JavaScript示例来演示事件委托是如果工作的。 假">
@@ -22,27 +22,27 @@
     
         
           
-              <link rel="shortcut icon" href="/sjywz/images/favicon.ico">
+              <link rel="shortcut icon" href="/images/favicon.ico">
           
         
         
           
-            <link rel="icon" type="image/png" href="/sjywz/images/favicon-192x192.png" sizes="192x192">
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
           
         
         
           
-            <link rel="apple-touch-icon" sizes="180x180" href="/sjywz/images/apple-touch-icon.png">
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
           
         
     
     <!-- title -->
     <title>JavaScript事件委托是如何工作的？</title>
     <!-- styles -->
-    <link rel="stylesheet" href="/sjywz/css/style.css">
+    <link rel="stylesheet" href="/css/style.css">
     <!-- persian styles -->
     
-      <link rel="stylesheet" href="/sjywz/css/rtl.css">
+      <link rel="stylesheet" href="/css/rtl.css">
     
     <!-- rss -->
     
@@ -59,11 +59,11 @@
     <span id="nav">
       <ul>
          
-          <li><a href="/sjywz/">Home</a></li>
+          <li><a href="/">Home</a></li>
          
-          <li><a href="/sjywz/about/">About</a></li>
+          <li><a href="/about/">About</a></li>
          
-          <li><a href="/sjywz/archives/">Writing</a></li>
+          <li><a href="/archives/">Writing</a></li>
         
       </ul>
     </span>
@@ -71,10 +71,10 @@
     <span id="actions">
       <ul>
         
-        <li><a class="icon" href="/sjywz/2020/04/01/单向历/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        <li><a class="icon" href="/2020/04/01/单向历/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
         
         
-        <li><a class="icon" href="/sjywz/2019/07/20/php反射类/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        <li><a class="icon" href="/2019/07/20/php反射类/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
         
         <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
         <!-- <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li> -->
@@ -137,7 +137,7 @@
       
     <div class="article-tag">
         <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/sjywz/tags/js/">js</a>, <a class="tag-link" href="/sjywz/tags/他山之石/">他山之石</a>
+        <a class="tag-link" href="/tags/js/">js</a>, <a class="tag-link" href="/tags/他山之石/">他山之石</a>
     </div>
 
 
@@ -176,11 +176,11 @@
     <div id="nav-footer" style="display: none">
       <ul>
          
-          <li><a href="/sjywz/">Home</a></li>
+          <li><a href="/">Home</a></li>
          
-          <li><a href="/sjywz/about/">About</a></li>
+          <li><a href="/about/">About</a></li>
          
-          <li><a href="/sjywz/archives/">Writing</a></li>
+          <li><a href="/archives/">Writing</a></li>
         
       </ul>
     </div>
@@ -229,11 +229,11 @@
     <nav>
       <ul>
          
-          <li><a href="/sjywz/">Home</a></li>
+          <li><a href="/">Home</a></li>
          
-          <li><a href="/sjywz/about/">About</a></li>
+          <li><a href="/about/">About</a></li>
          
-          <li><a href="/sjywz/archives/">Writing</a></li>
+          <li><a href="/archives/">Writing</a></li>
         
       </ul>
     </nav>
@@ -242,15 +242,15 @@
 
     </div>
     <!-- styles -->
-<link rel="stylesheet" href="/sjywz/lib/font-awesome/css/all.min.css">
-<link rel="stylesheet" href="/sjywz/lib/justified-gallery/css/justifiedGallery.min.css">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
 
     <!-- jquery -->
-<script src="/sjywz/lib/jquery/jquery.min.js"></script>
-<script src="/sjywz/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
 <!-- clipboard -->
 
-  <script src="/sjywz/lib/clipboard/clipboard.min.js"></script>
+  <script src="/lib/clipboard/clipboard.min.js"></script>
   <script type="text/javascript">
   $(function() {
     // copy-btn HTML
@@ -271,12 +271,22 @@
   })
   </script>
 
-<script src="/sjywz/js/main.js"></script>
+<script src="/js/main.js"></script>
 <!-- search -->
 
 <!-- Google Analytics -->
 
 <!-- Baidu Analytics -->
+
+    <script type="text/javascript">
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?29d4400c26dd103d094ce85ff8b8e3c9";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
 
 <!-- Disqus Comments -->
 
