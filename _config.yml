@@ -76,29 +76,27 @@ pagination_dir: page
 theme: cactus
 theme_config:
   colorscheme: white
+  nav:
+    home: /
+    about: /about/
+    articles: /archives/
+    # projects: projects_url
+  social_links:
+    github: http://github.com/sjywz
+    mail: mailto:ysjywz@gmail.com
+  posts_overview:
+    show_all_posts: false
+    post_count: 10
+    sort_updated: false
+  copyright:
+    start_year: 2019
+    end_year:
+  baidu_analytics:
+    enabled: false
+    id: 2e6da3c375c8a87f5b664cea6d4cb29c
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type:
 
-#copyright
-copyright:
-  start_year: 2019
-  end_year:
-
-#nav
-nav:
-  home: /
-  about: /about/
-  articles: /archives/
-  projects: projects_url
-
-posts_overview:
-  show_all_posts: false
-  post_count: 10
-  sort_updated: false
-
-social_links:
-  github: http://github.com/sjywz/sjywz
-  mail: mailto:ysjywz@email.com
