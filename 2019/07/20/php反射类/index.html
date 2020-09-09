@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang=en>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="很多东西在就算知道也没啥用。比如php反射类，以前翻看手册时也看过，但就是不知道有啥用。官网介绍：PHP 5 具有完整的反射 API，添加了对类、接口、函数、方法和扩展进行反向工程的能力。 此外，反射 API 提供了方法来取出函数、类和方法中的文档注释。最近看了深入 Laravel 核心 ，其中介绍到Laravel的Ioc容器就是依靠php反射类的实现才算明白，于是又看了一遍php反射类，顺便记录">
+<meta name="keywords" content="php">
+<meta property="og:type" content="article">
+<meta property="og:title" content="php反射类">
+<meta property="og:url" content="https://sjywz.github.io/2019/07/20/php反射类/index.html">
+<meta property="og:site_name" content="一记">
+<meta property="og:description" content="很多东西在就算知道也没啥用。比如php反射类，以前翻看手册时也看过，但就是不知道有啥用。官网介绍：PHP 5 具有完整的反射 API，添加了对类、接口、函数、方法和扩展进行反向工程的能力。 此外，反射 API 提供了方法来取出函数、类和方法中的文档注释。最近看了深入 Laravel 核心 ，其中介绍到Laravel的Ioc容器就是依靠php反射类的实现才算明白，于是又看了一遍php反射类，顺便记录">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2020-09-09T07:58:45.224Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="php反射类">
+<meta name="twitter:description" content="很多东西在就算知道也没啥用。比如php反射类，以前翻看手册时也看过，但就是不知道有啥用。官网介绍：PHP 5 具有完整的反射 API，添加了对类、接口、函数、方法和扩展进行反向工程的能力。 此外，反射 API 提供了方法来取出函数、类和方法中的文档注释。最近看了深入 Laravel 核心 ，其中介绍到Laravel的Ioc容器就是依靠php反射类的实现才算明白，于是又看了一遍php反射类，顺便记录">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/sjywz/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/sjywz/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/sjywz/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>php反射类</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/sjywz/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/sjywz/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/sjywz/">Home</a></li>
+         
+          <li><a href="/sjywz/about/">About</a></li>
+         
+          <li><a href="/sjywz/archives/">Writing</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/sjywz/2019/07/20/JavaScript事件委托是如何工作的？/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/sjywz/2019/07/14/《时间的朋友》读后感/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <!-- <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li> -->
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://sjywz.github.io/2019/07/20/php反射类/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://sjywz.github.io/2019/07/20/php反射类/&text=php反射类"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://sjywz.github.io/2019/07/20/php反射类/&title=php反射类"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://sjywz.github.io/2019/07/20/php反射类/&is_video=false&description=php反射类"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=php反射类&body=Check out this article: https://sjywz.github.io/2019/07/20/php反射类/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://sjywz.github.io/2019/07/20/php反射类/&title=php反射类"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://sjywz.github.io/2019/07/20/php反射类/&title=php反射类"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://sjywz.github.io/2019/07/20/php反射类/&title=php反射类"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://sjywz.github.io/2019/07/20/php反射类/&title=php反射类"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://sjywz.github.io/2019/07/20/php反射类/&name=php反射类&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://sjywz.github.io/2019/07/20/php反射类/&t=php反射类"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        php反射类
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">一记</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2019-07-20T21:17:03.000Z" itemprop="datePublished">2019-07-20</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/sjywz/tags/php/">php</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>很多东西在就算知道也没啥用。比如php反射类，以前翻看手册时也看过，但就是不知道有啥用。官网介绍：PHP 5 具有完整的反射 API，添加了对类、接口、函数、方法和扩展进行反向工程的能力。 此外，反射 API 提供了方法来取出函数、类和方法中的文档注释。最近看了<a href="https://learnku.com/docs/laravel-core-concept/5.5" target="_blank" rel="noopener">深入 Laravel 核心 </a>，其中介绍到Laravel的Ioc容器就是依靠php反射类的实现才算明白，于是又看了一遍<a href="https://php.net/manual/zh/book.reflection.php" target="_blank" rel="noopener">php反射类</a>，顺便记录一下。</p>
+<blockquote>
+<p>ReflectionClass 类报告了一个类的有关信息。<br>ReflectionClass::getConstructor — 获取类的构造函数<br>ReflectionClass::getName — 获取类名<br>ReflectionClass::newInstance — 从指定的参数创建一个新的类实例<br>ReflectionClass::getMethod — 获取一个类方法<br>ReflectionMethod::setAccessible — 设置方法是否访问<br>ReflectionMethod::invoke — 执行一个反射的方法<br>ReflectionFunctionAbstract::getParameters — 获取参数</p>
+</blockquote>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">  <span class="keyword">public</span> $num;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">($num = <span class="number">0</span>)</span></span></span><br><span class="line"><span class="function">  </span>&#123;</span><br><span class="line">    <span class="keyword">$this</span>-&gt;num = $num;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getNum</span><span class="params">()</span></span></span><br><span class="line"><span class="function">  </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;num;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> <span class="function"><span class="keyword">function</span> <span class="title">_modifyNum</span><span class="params">($num)</span></span></span><br><span class="line"><span class="function">  </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>($num)&#123;</span><br><span class="line">      <span class="keyword">$this</span>-&gt;num = $num;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$reflection = <span class="keyword">new</span> ReflectionClass(<span class="string">'Test'</span>);<span class="comment">//获取Test类的构造函数</span></span><br><span class="line"><span class="keyword">echo</span> $reflection-&gt;getName(),PHP_EOL;<span class="comment">//获取类名</span></span><br><span class="line">$test = $reflection-&gt;newInstance(<span class="number">1</span>);<span class="comment">//传入参数创建实例</span></span><br><span class="line"><span class="keyword">echo</span> $test-&gt;getNum(),PHP_EOL;<span class="comment">//调用方法getNum</span></span><br><span class="line">$method = $reflection-&gt;getmethod(<span class="string">'_modifyNum'</span>);<span class="comment">//获取类的私有方法_modifyNum</span></span><br><span class="line">print_r($method-&gt;getParameters());<span class="comment">//获取方法参数</span></span><br><span class="line">$method-&gt;setAccessible(<span class="keyword">true</span>);<span class="comment">//设置方法可访问</span></span><br><span class="line">$method-&gt;invoke($test,<span class="number">2</span>);<span class="comment">//传入参数调用私有方法</span></span><br><span class="line"><span class="keyword">echo</span> $test-&gt;getNum(),PHP_EOL;<span class="comment">//再次调用方法getNum</span></span><br></pre></td></tr></table></figure>
+
+<p>以上程序输出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Test</span><br><span class="line">1</span><br><span class="line">Array</span><br><span class="line">(</span><br><span class="line">    [0] =&gt; ReflectionParameter Object</span><br><span class="line">        (</span><br><span class="line">            [name] =&gt; num</span><br><span class="line">        )</span><br><span class="line">)</span><br><span class="line">2</span><br></pre></td></tr></table></figure>
+
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/sjywz/">Home</a></li>
+         
+          <li><a href="/sjywz/about/">About</a></li>
+         
+          <li><a href="/sjywz/archives/">Writing</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://sjywz.github.io/2019/07/20/php反射类/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://sjywz.github.io/2019/07/20/php反射类/&text=php反射类"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://sjywz.github.io/2019/07/20/php反射类/&title=php反射类"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://sjywz.github.io/2019/07/20/php反射类/&is_video=false&description=php反射类"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=php反射类&body=Check out this article: https://sjywz.github.io/2019/07/20/php反射类/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://sjywz.github.io/2019/07/20/php反射类/&title=php反射类"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://sjywz.github.io/2019/07/20/php反射类/&title=php反射类"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://sjywz.github.io/2019/07/20/php反射类/&title=php反射类"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://sjywz.github.io/2019/07/20/php反射类/&title=php反射类"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://sjywz.github.io/2019/07/20/php反射类/&name=php反射类&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://sjywz.github.io/2019/07/20/php反射类/&t=php反射类"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <!-- <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a> -->
+        <!-- <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a> -->
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2019-2020
+    柳周侯爷
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/sjywz/">Home</a></li>
+         
+          <li><a href="/sjywz/about/">About</a></li>
+         
+          <li><a href="/sjywz/archives/">Writing</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+<link rel="stylesheet" href="/sjywz/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/sjywz/lib/justified-gallery/css/justifiedGallery.min.css">
+
+    <!-- jquery -->
+<script src="/sjywz/lib/jquery/jquery.min.js"></script>
+<script src="/sjywz/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<!-- clipboard -->
+
+  <script src="/sjywz/lib/clipboard/clipboard.min.js"></script>
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+<script src="/sjywz/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>

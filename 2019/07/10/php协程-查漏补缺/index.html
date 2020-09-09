@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang=en>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="原文：http://www.laruence.com/2015/05/28/3038.html之前就看过鸟哥的「在PHP中使用协程实现多任务调度」，看的迷迷糊糊的，好多的没明白的也就搁置，反正工作中也用不上。最近又重新看了一遍，顺便梳理一下。  yield生成器 生成器提供了一种更容易的方法来实现简单的对象迭代，相比较定义类实现 Iterator 接口的方式，性能开销和复杂性大大降低。  123">
+<meta name="keywords" content="php">
+<meta property="og:type" content="article">
+<meta property="og:title" content="php协程-查漏补缺">
+<meta property="og:url" content="https://sjywz.github.io/2019/07/10/php协程-查漏补缺/index.html">
+<meta property="og:site_name" content="一记">
+<meta property="og:description" content="原文：http://www.laruence.com/2015/05/28/3038.html之前就看过鸟哥的「在PHP中使用协程实现多任务调度」，看的迷迷糊糊的，好多的没明白的也就搁置，反正工作中也用不上。最近又重新看了一遍，顺便梳理一下。  yield生成器 生成器提供了一种更容易的方法来实现简单的对象迭代，相比较定义类实现 Iterator 接口的方式，性能开销和复杂性大大降低。  123">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2020-09-09T07:58:45.224Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="php协程-查漏补缺">
+<meta name="twitter:description" content="原文：http://www.laruence.com/2015/05/28/3038.html之前就看过鸟哥的「在PHP中使用协程实现多任务调度」，看的迷迷糊糊的，好多的没明白的也就搁置，反正工作中也用不上。最近又重新看了一遍，顺便梳理一下。  yield生成器 生成器提供了一种更容易的方法来实现简单的对象迭代，相比较定义类实现 Iterator 接口的方式，性能开销和复杂性大大降低。  123">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/sjywz/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/sjywz/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/sjywz/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>php协程-查漏补缺</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/sjywz/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/sjywz/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/sjywz/">Home</a></li>
+         
+          <li><a href="/sjywz/about/">About</a></li>
+         
+          <li><a href="/sjywz/archives/">Writing</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/sjywz/2019/07/14/《时间的朋友》读后感/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/sjywz/2019/07/07/大厂技术团/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <!-- <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li> -->
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://sjywz.github.io/2019/07/10/php协程-查漏补缺/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://sjywz.github.io/2019/07/10/php协程-查漏补缺/&text=php协程-查漏补缺"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://sjywz.github.io/2019/07/10/php协程-查漏补缺/&title=php协程-查漏补缺"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://sjywz.github.io/2019/07/10/php协程-查漏补缺/&is_video=false&description=php协程-查漏补缺"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=php协程-查漏补缺&body=Check out this article: https://sjywz.github.io/2019/07/10/php协程-查漏补缺/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://sjywz.github.io/2019/07/10/php协程-查漏补缺/&title=php协程-查漏补缺"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://sjywz.github.io/2019/07/10/php协程-查漏补缺/&title=php协程-查漏补缺"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://sjywz.github.io/2019/07/10/php协程-查漏补缺/&title=php协程-查漏补缺"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://sjywz.github.io/2019/07/10/php协程-查漏补缺/&title=php协程-查漏补缺"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://sjywz.github.io/2019/07/10/php协程-查漏补缺/&name=php协程-查漏补缺&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://sjywz.github.io/2019/07/10/php协程-查漏补缺/&t=php协程-查漏补缺"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#yield生成器"><span class="toc-number">1.</span> <span class="toc-text">yield生成器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SplQueue"><span class="toc-number">2.</span> <span class="toc-text">SplQueue</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        php协程-查漏补缺
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">一记</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2019-07-10T11:54:49.000Z" itemprop="datePublished">2019-07-10</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/sjywz/tags/php/">php</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <blockquote>
+<p>原文：<a href="http://www.laruence.com/2015/05/28/3038.html" target="_blank" rel="noopener">http://www.laruence.com/2015/05/28/3038.html</a><br>之前就看过鸟哥的「在PHP中使用协程实现多任务调度」，看的迷迷糊糊的，好多的没明白的也就搁置，反正工作中也用不上。最近又重新看了一遍，顺便梳理一下。</p>
+</blockquote>
+<h3 id="yield生成器"><a href="#yield生成器" class="headerlink" title="yield生成器"></a>yield生成器</h3><blockquote>
+<p>生成器提供了一种更容易的方法来实现简单的对象迭代，相比较定义类实现 Iterator 接口的方式，性能开销和复杂性大大降低。</p>
+</blockquote>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span><span class="params">()</span></span>&#123;</span><br><span class="line">  <span class="keyword">for</span>($i = <span class="number">1</span>; $i &lt;= <span class="number">3</span>; $i++)&#123;</span><br><span class="line">    $out = (<span class="keyword">yield</span> $i);</span><br><span class="line">    <span class="keyword">if</span>($out)&#123;</span><br><span class="line">      <span class="keyword">echo</span> PHP_EOL;</span><br><span class="line">      var_dump($out);<span class="comment">//外部传入值</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">foreach</span>(test() <span class="keyword">as</span> $v)&#123;</span><br><span class="line">  <span class="keyword">echo</span> $v,<span class="string">' '</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> PHP_EOL;</span><br><span class="line">$it = test();</span><br><span class="line"><span class="keyword">echo</span> $it-&gt;current();</span><br><span class="line"><span class="keyword">echo</span> $it-&gt;send(<span class="number">111</span>);</span><br><span class="line"><span class="keyword">echo</span> $it-&gt;send(<span class="number">222</span>);</span><br></pre></td></tr></table></figure>
+
+<p>以上程序输出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1 2 3</span><br><span class="line">1</span><br><span class="line">int(111)</span><br><span class="line">2</span><br><span class="line">int(222)</span><br><span class="line">3</span><br></pre></td></tr></table></figure>
+
+<p><code>yield</code>生成器还能通过<code>send()</code>实现遍历和回传数据，实现调用者与被调用者的双向通信。也可以通过遍历器的<code>next()</code>、<code>current()</code>实现遍历，只是不能回传数据。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$it = test();</span><br><span class="line"><span class="keyword">while</span>($it-&gt;valid())&#123;</span><br><span class="line">  <span class="keyword">echo</span> $it-&gt;current();</span><br><span class="line">  $it-&gt;next();</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//输出：123 </span></span><br><span class="line"><span class="comment">//通过调用cureent()获取当前值，next()将指针指向下一个，valid()判断是否已完成迭代</span></span><br></pre></td></tr></table></figure>
+
+<p><code>yield</code>更多的用来实现读取内存有限的情况下读取超大文件。</p>
+<h3 id="SplQueue"><a href="#SplQueue" class="headerlink" title="SplQueue"></a>SplQueue</h3><blockquote>
+<p>SplQueue 类通过使用一个双向链表来提供队列的主要功能。<br>队列是一种先进先出的数据结构。<br>双链表 (DLL) 是一个链接到两个方向的节点列表。当底层结构是 DLL 时, 迭代器的操作、对两端的访问、节点的添加或删除都具有 O (1) 的开销。因此, 它为栈和队列提供了一个合适的实现。</p>
+</blockquote>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$queue = <span class="keyword">new</span> SplQueue();</span><br><span class="line">$queue-&gt;enqueue(<span class="string">'task 1'</span>);</span><br><span class="line">$queue-&gt;enqueue(<span class="string">'task 2'</span>);</span><br><span class="line"><span class="keyword">foreach</span>($queue <span class="keyword">as</span> $v)&#123;</span><br><span class="line">  <span class="keyword">echo</span> $v,PHP_EOL;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">'==============='</span>,PHP_EOL;</span><br><span class="line"><span class="keyword">while</span>(!$queue-&gt;isEmpty())&#123;</span><br><span class="line">  <span class="keyword">echo</span> $queue-&gt;dequeue(),PHP_EOL;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>以上程序输出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">task 1</span><br><span class="line">task 2</span><br><span class="line">===============</span><br><span class="line">task 1</span><br><span class="line">task 2</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://www.php.net/manual/zh/class.splqueue.php" target="_blank" rel="noopener"><code>SplQueue</code></a>列队本身实现了<code>Iterator</code>接口，可以直接使用<code>foreach</code>进行遍历。使用<code>enqueue()</code>将一个元素添加到队列中，<code>dequeue()</code>按先进先出原则从队列中取出一个元素，<code>isEmpty()</code>判断队列是否为空。</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/sjywz/">Home</a></li>
+         
+          <li><a href="/sjywz/about/">About</a></li>
+         
+          <li><a href="/sjywz/archives/">Writing</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#yield生成器"><span class="toc-number">1.</span> <span class="toc-text">yield生成器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SplQueue"><span class="toc-number">2.</span> <span class="toc-text">SplQueue</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://sjywz.github.io/2019/07/10/php协程-查漏补缺/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://sjywz.github.io/2019/07/10/php协程-查漏补缺/&text=php协程-查漏补缺"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://sjywz.github.io/2019/07/10/php协程-查漏补缺/&title=php协程-查漏补缺"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://sjywz.github.io/2019/07/10/php协程-查漏补缺/&is_video=false&description=php协程-查漏补缺"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=php协程-查漏补缺&body=Check out this article: https://sjywz.github.io/2019/07/10/php协程-查漏补缺/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://sjywz.github.io/2019/07/10/php协程-查漏补缺/&title=php协程-查漏补缺"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://sjywz.github.io/2019/07/10/php协程-查漏补缺/&title=php协程-查漏补缺"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://sjywz.github.io/2019/07/10/php协程-查漏补缺/&title=php协程-查漏补缺"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://sjywz.github.io/2019/07/10/php协程-查漏补缺/&title=php协程-查漏补缺"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://sjywz.github.io/2019/07/10/php协程-查漏补缺/&name=php协程-查漏补缺&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://sjywz.github.io/2019/07/10/php协程-查漏补缺/&t=php协程-查漏补缺"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <!-- <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a> -->
+        <!-- <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a> -->
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2019-2020
+    柳周侯爷
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/sjywz/">Home</a></li>
+         
+          <li><a href="/sjywz/about/">About</a></li>
+         
+          <li><a href="/sjywz/archives/">Writing</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+<link rel="stylesheet" href="/sjywz/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/sjywz/lib/justified-gallery/css/justifiedGallery.min.css">
+
+    <!-- jquery -->
+<script src="/sjywz/lib/jquery/jquery.min.js"></script>
+<script src="/sjywz/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<!-- clipboard -->
+
+  <script src="/sjywz/lib/clipboard/clipboard.min.js"></script>
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+<script src="/sjywz/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>
