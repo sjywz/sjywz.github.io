@@ -7,16 +7,16 @@ title: 一记
 subtitle: 岁月便签，随便一记
 description: 个人记录,博客
 keywords: 博客,个人
-author: Yy
+author: 柳周侯爷
 language: en
-timezone:
+timezone: 
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
 url: https://sjywz.github.io
 root: /
 permalink: :year/:month/:day/:title/
-permalink_defaults:
+permalink_defaults: 
 
 # Directory
 source_dir: source
@@ -73,9 +73,32 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: polarbear
+theme: cactus
+theme_config:
+  colorscheme: white
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type:
+
+#copyright
+copyright:
+  start_year: 2019
+  end_year:
+
+#nav
+nav:
+  home: /
+  about: /about/
+  articles: /archives/
+  projects: projects_url
+
+posts_overview:
+  show_all_posts: false
+  post_count: 10
+  sort_updated: false
+
+social_links:
+  github: http://github.com/sjywz/sjywz
+  mail: mailto:ysjywz@email.com
