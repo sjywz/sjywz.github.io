@@ -84,6 +84,8 @@ theme_config:
   social_links:
     github: http://github.com/sjywz
     mail: mailto:ysjywz@gmail.com
+  post:
+    show_updated: false
   posts_overview:
     show_all_posts: false
     post_count: 10
