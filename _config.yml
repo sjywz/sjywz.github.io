@@ -14,7 +14,7 @@ timezone:
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
 url: https://sjywz.github.io
-root: /sjywz/
+root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults: 
 
@@ -92,8 +92,8 @@ theme_config:
     start_year: 2019
     end_year:
   baidu_analytics:
-    enabled: false
-    id: 2e6da3c375c8a87f5b664cea6d4cb29c
+    enabled: true
+    id: 29d4400c26dd103d094ce85ff8b8e3c9
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
