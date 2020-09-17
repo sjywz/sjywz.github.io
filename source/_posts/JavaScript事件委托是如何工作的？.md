@@ -4,9 +4,10 @@ date: 2019-07-20 22:44:06
 tags:
 - 他山之石
 - js
+- 翻译
 ---
 
-> 原文链接：[How JavaScript Event Delegation Works](https://davidwalsh.name/event-delegate)
+原文链接：[How JavaScript Event Delegation Works](https://davidwalsh.name/event-delegate)
 
 事件委托有着充分的理由作为JavaScript中最热门的方法之一。事件委托避免你为每一个明确节点添加事件监听，与之代替的是添加事件到父节点。通过事件冒泡查找到匹配的子元素。基础概念相当简单，不过许多人并不理解事件委托是如何工作的。下面让我们通过一个基础的JavaScript示例来演示事件委托是如果工作的。
 
