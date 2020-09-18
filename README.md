@@ -1,3 +1,8 @@
-# 个人博客项目
+<h1 align="center">一记</h1>
 
-hexo个人博客
+<p align="center">hexo的个人博客</p>
+
+[![Build Status](https://travis-ci.com/sjywz/sjywz.github.io.svg?branch=master)](https://travis-ci.com/sjywz/sjywz.github.io)
+
+---
+[lzhy.me](https://lzhy.me)
