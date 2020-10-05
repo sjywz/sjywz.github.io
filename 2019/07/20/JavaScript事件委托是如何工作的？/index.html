@@ -6,18 +6,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="description" content="原文链接：How JavaScript Event Delegation Works  事件委托有着充分的理由作为JavaScript中最热门的方法之一。事件委托避免你为每一个明确节点添加事件监听，与之代替的是添加事件到父节点。通过事件冒泡查找到匹配的子元素。基础概念相当简单，不过许多人并不理解事件委托是如何工作的。下面让我们通过一个基础的JavaScript示例来演示事件委托是如果工作的。 假">
-<meta name="keywords" content="他山之石,js">
+    <meta name="description" content="原文链接：How JavaScript Event Delegation Works 事件委托有着充分的理由作为JavaScript中最热门的方法之一。事件委托避免你为每一个明确节点添加事件监听，与之代替的是添加事件到父节点。通过事件冒泡查找到匹配的子元素。基础概念相当简单，不过许多人并不理解事件委托是如何工作的。下面让我们通过一个基础的JavaScript示例来演示事件委托是如果工作的。 假设我">
+<meta name="keywords" content="他山之石,js,翻译">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JavaScript事件委托是如何工作的？">
 <meta property="og:url" content="https://sjywz.github.io/2019/07/20/JavaScript事件委托是如何工作的？/index.html">
 <meta property="og:site_name" content="一记">
-<meta property="og:description" content="原文链接：How JavaScript Event Delegation Works  事件委托有着充分的理由作为JavaScript中最热门的方法之一。事件委托避免你为每一个明确节点添加事件监听，与之代替的是添加事件到父节点。通过事件冒泡查找到匹配的子元素。基础概念相当简单，不过许多人并不理解事件委托是如何工作的。下面让我们通过一个基础的JavaScript示例来演示事件委托是如果工作的。 假">
+<meta property="og:description" content="原文链接：How JavaScript Event Delegation Works 事件委托有着充分的理由作为JavaScript中最热门的方法之一。事件委托避免你为每一个明确节点添加事件监听，与之代替的是添加事件到父节点。通过事件冒泡查找到匹配的子元素。基础概念相当简单，不过许多人并不理解事件委托是如何工作的。下面让我们通过一个基础的JavaScript示例来演示事件委托是如果工作的。 假设我">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-09-16T06:36:54.351Z">
+<meta property="og:updated_time" content="2020-10-05T09:56:26.497Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript事件委托是如何工作的？">
-<meta name="twitter:description" content="原文链接：How JavaScript Event Delegation Works  事件委托有着充分的理由作为JavaScript中最热门的方法之一。事件委托避免你为每一个明确节点添加事件监听，与之代替的是添加事件到父节点。通过事件冒泡查找到匹配的子元素。基础概念相当简单，不过许多人并不理解事件委托是如何工作的。下面让我们通过一个基础的JavaScript示例来演示事件委托是如果工作的。 假">
+<meta name="twitter:description" content="原文链接：How JavaScript Event Delegation Works 事件委托有着充分的理由作为JavaScript中最热门的方法之一。事件委托避免你为每一个明确节点添加事件监听，与之代替的是添加事件到父节点。通过事件冒泡查找到匹配的子元素。基础概念相当简单，不过许多人并不理解事件委托是如何工作的。下面让我们通过一个基础的JavaScript示例来演示事件委托是如果工作的。 假设我">
     
     
         
@@ -137,7 +137,7 @@
       
     <div class="article-tag">
         <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/tags/js/">js</a>, <a class="tag-link" href="/tags/他山之石/">他山之石</a>
+        <a class="tag-link" href="/tags/js/">js</a>, <a class="tag-link" href="/tags/他山之石/">他山之石</a>, <a class="tag-link" href="/tags/翻译/">翻译</a>
     </div>
 
 
@@ -146,9 +146,7 @@
   
 
   <div class="content" itemprop="articleBody">
-    <blockquote>
-<p>原文链接：<a href="https://davidwalsh.name/event-delegate" target="_blank" rel="noopener">How JavaScript Event Delegation Works</a></p>
-</blockquote>
+    <p>原文链接：<a href="https://davidwalsh.name/event-delegate" target="_blank" rel="noopener">How JavaScript Event Delegation Works</a></p>
 <p>事件委托有着充分的理由作为JavaScript中最热门的方法之一。事件委托避免你为每一个明确节点添加事件监听，与之代替的是添加事件到父节点。通过事件冒泡查找到匹配的子元素。基础概念相当简单，不过许多人并不理解事件委托是如何工作的。下面让我们通过一个基础的JavaScript示例来演示事件委托是如果工作的。</p>
 <p>假设我们有这样一个带有子节点的<code>ul</code>标签:</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ul</span> <span class="attr">id</span>=<span class="string">"parent-list"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span> <span class="attr">id</span>=<span class="string">"post-1"</span>&gt;</span>Item 1<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span> <span class="attr">id</span>=<span class="string">"post-2"</span>&gt;</span>Item 2<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span> <span class="attr">id</span>=<span class="string">"post-3"</span>&gt;</span>Item 3<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span> <span class="attr">id</span>=<span class="string">"post-4"</span>&gt;</span>Item 4<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span> <span class="attr">id</span>=<span class="string">"post-5"</span>&gt;</span>Item 5<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span> <span class="attr">id</span>=<span class="string">"post-6"</span>&gt;</span>Item 6<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
