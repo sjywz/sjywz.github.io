@@ -5,4 +5,4 @@
 [![Build Status](https://travis-ci.com/sjywz/sjywz.github.io.svg?branch=master)](https://travis-ci.com/sjywz/sjywz.github.io)
 
 ---
-[lzhy.me](https://lzhy.me)
+[sjywz.github.io](sjywz.github.io)
