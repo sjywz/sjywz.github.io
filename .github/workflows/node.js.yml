@@ -32,7 +32,7 @@ jobs:
         hexo g
     - name: Deploy to Github Pages
       env:
-        REPO: https://github.com/sjywz/sjywz.github.io
+        REPO: sjywz/sjywz.github.io
         GIT_NAME: sjywz
         GIT_EMAIL: ${{ secrets.GIT_EMAIL }}
         GH_TOKEN: ${{ secrets.GH_TOKEN }}
