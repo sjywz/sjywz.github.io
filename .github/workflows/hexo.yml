@@ -1,0 +1,50 @@
+# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: hexo generate
+
+on:
+  push:
+    branches: master
+    
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: A job to deploy blog.
+
+    steps:
+    - name: checkout
+      uses: actions/checkout@v2
+
+    - name: step node
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+
+    - name: check node&&npm
+      run: |
+        node -v
+        npm -v
+
+    - name: Install dependencies
+      run: |
+        npm i -g hexo-cli
+        npm i
+
+    - name: hexo generator public file
+      run: |
+        hexo clean
+        hexo g
+        
+    - name: Deploy to GitHub Pages
+      if: success()
+      uses: crazy-max/ghaction-github-pages@v2
+      with:
+        target_branch: gh-pages
+        build_dir: public
+      env:
+        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+        
+    
+    
+
