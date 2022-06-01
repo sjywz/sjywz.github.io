@@ -4,6 +4,6 @@
 
 ---
 
-[github](https://sjywz.github.io/)
+[sjywz.github.io](https://sjywz.github.io/)
 
-[by Vercel](https://blog.bcode.cc/)
+[blog.bcode.cc](https://blog.bcode.cc/)
