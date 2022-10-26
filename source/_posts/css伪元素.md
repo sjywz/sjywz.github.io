@@ -46,7 +46,7 @@ MDN的说明：[伪元素是一个附加至选择器末的关键词，允许你�
 <p class="p">hello word</p>
 ```
 
-![img](https://blog-1254344224.cos.ap-nanjing.myqcloud.com/WX20220601-144115%402x.png)
+![img](http://cms.bcode.cc/uploads/medium_WX_20220601_144115_2x_43a9b59573.png)
 
 ---
 
@@ -58,7 +58,7 @@ MDN的说明：[伪元素是一个附加至选择器末的关键词，允许你�
 }
 ```
 
-![img](https://blog-1254344224.cos.ap-nanjing.myqcloud.com/WX20220601-144945%402x.png)
+![img](http://cms.bcode.cc/uploads/medium_WX_20220601_144945_2x_8ad2785fde.png)
 
 ---
 
@@ -70,4 +70,4 @@ MDN的说明：[伪元素是一个附加至选择器末的关键词，允许你�
 }
 ```
 
-![img](https://blog-1254344224.cos.ap-nanjing.myqcloud.com/WX20220601-145131%402x.png)
+![img](http://cms.bcode.cc/uploads/medium_WX_20220601_145131_2x_d4b1300686.png)
