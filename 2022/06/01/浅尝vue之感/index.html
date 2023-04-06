@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="引最近因为做小程序，鉴于之前使用过taro不尽人意，这次就换uniapp试试了。taro同时支持vue和react开发，但uniapp只能使用vue。一直没有用过vue做开发，就当练手了。 想起vue刚出来那会儿，前端开发还在使用jQuery，那时node也刚出不就，我的工作也主要是php。当时比较火的是anggular，做后台管理页面的时候还引入angular做过小小的尝试，并未觉得有啥新意。判">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浅尝vue之感">
+<meta property="og:url" content="https://sjywz.github.io/2022/06/01/%E6%B5%85%E5%B0%9Dvue%E4%B9%8B%E6%84%9F/index.html">
+<meta property="og:site_name" content="一记">
+<meta property="og:description" content="引最近因为做小程序，鉴于之前使用过taro不尽人意，这次就换uniapp试试了。taro同时支持vue和react开发，但uniapp只能使用vue。一直没有用过vue做开发，就当练手了。 想起vue刚出来那会儿，前端开发还在使用jQuery，那时node也刚出不就，我的工作也主要是php。当时比较火的是anggular，做后台管理页面的时候还引入angular做过小小的尝试，并未觉得有啥新意。判">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-06-01T16:46:22.000Z">
+<meta property="article:modified_time" content="2023-04-06T15:10:52.012Z">
+<meta property="article:author" content="柳周侯爷">
+<meta property="article:tag" content="个人随笔">
+<meta property="article:tag" content="vue">
+<meta property="article:tag" content="react">
+<meta name="twitter:card" content="summary">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>浅尝vue之感</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 7.0.0-rc1"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2022/10/24/%E5%87%A1%E4%BA%BA%E4%BF%AE%E4%BB%99%E4%BC%A0%E4%BB%99/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2021/09/03/css%E4%BC%AA%E5%85%83%E7%B4%A0/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <!-- <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li> -->
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://sjywz.github.io/2022/06/01/%E6%B5%85%E5%B0%9Dvue%E4%B9%8B%E6%84%9F/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://sjywz.github.io/2022/06/01/%E6%B5%85%E5%B0%9Dvue%E4%B9%8B%E6%84%9F/&text=浅尝vue之感"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://sjywz.github.io/2022/06/01/%E6%B5%85%E5%B0%9Dvue%E4%B9%8B%E6%84%9F/&title=浅尝vue之感"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://sjywz.github.io/2022/06/01/%E6%B5%85%E5%B0%9Dvue%E4%B9%8B%E6%84%9F/&is_video=false&description=浅尝vue之感"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=浅尝vue之感&body=Check out this article: https://sjywz.github.io/2022/06/01/%E6%B5%85%E5%B0%9Dvue%E4%B9%8B%E6%84%9F/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://sjywz.github.io/2022/06/01/%E6%B5%85%E5%B0%9Dvue%E4%B9%8B%E6%84%9F/&title=浅尝vue之感"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://sjywz.github.io/2022/06/01/%E6%B5%85%E5%B0%9Dvue%E4%B9%8B%E6%84%9F/&title=浅尝vue之感"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://sjywz.github.io/2022/06/01/%E6%B5%85%E5%B0%9Dvue%E4%B9%8B%E6%84%9F/&title=浅尝vue之感"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://sjywz.github.io/2022/06/01/%E6%B5%85%E5%B0%9Dvue%E4%B9%8B%E6%84%9F/&title=浅尝vue之感"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://sjywz.github.io/2022/06/01/%E6%B5%85%E5%B0%9Dvue%E4%B9%8B%E6%84%9F/&name=浅尝vue之感&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://sjywz.github.io/2022/06/01/%E6%B5%85%E5%B0%9Dvue%E4%B9%8B%E6%84%9F/&t=浅尝vue之感"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%95"><span class="toc-number">1.</span> <span class="toc-text">引</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B"><span class="toc-number">2.</span> <span class="toc-text">示例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%88%91%E7%9A%84%E9%80%89%E6%8B%A9"><span class="toc-number">3.</span> <span class="toc-text">我的选择</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        浅尝vue之感
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">一记</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2022-06-01T16:46:22.000Z" itemprop="datePublished">2022-06-01</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/react/" rel="tag">react</a>, <a class="tag-link-link" href="/tags/vue/" rel="tag">vue</a>, <a class="tag-link-link" href="/tags/%E4%B8%AA%E4%BA%BA%E9%9A%8F%E7%AC%94/" rel="tag">个人随笔</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h3 id="引"><a href="#引" class="headerlink" title="引"></a>引</h3><p>最近因为做小程序，鉴于之前使用过taro不尽人意，这次就换uniapp试试了。taro同时支持vue和react开发，但uniapp只能使用vue。一直没有用过vue做开发，就当练手了。</p>
+<p>想起vue刚出来那会儿，前端开发还在使用jQuery，那时node也刚出不就，我的工作也主要是php。当时比较火的是anggular，做后台管理页面的时候还引入angular做过小小的尝试，并未觉得有啥新意。判断循环php模板一样能实现，还不用单独写接口，也没有js加载缓慢的页面闪动。自然也就没有进一步深入了解。</p>
+<p>因为工作需要自己也开始学习前端，毕竟php作为网站开发语言跟网页靠得太紧了。正所谓成也萧何败萧何，当初php因此发展，前端独立发展又导致了php的式微。后面web开发的借助node发展可谓是日新月异，从grunt、yoman到webpack、vite；从seajs、requirejs到commonjs、esm；从Backbone、angular到vue,react;不端的推陈出新，看得人眼花缭乱。</p>
+<p>最开始学习的时候vue和react都有看，网上各种说vue简单易学，react学习曲线陡峭。工作中也经常听到说vue不行，不适合做大型项目，对于这些我想说的是：项目真大到了连vue都不配么？我从一开始喜欢react，纯属react的jsx比vue各种指令更符合我的直观感受。没有什么方法、属性、指令，不需要按选项一个一个的是写，不用在视图模板和js之间来回切换，寻找变量方法。jsx搞定一切，一切都是js，开发更自由、更少的心智负担和更少的样板代码。随着最近的开发学习也有了更多的体会。</p>
+<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><p>以点击反转字符串为例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// react</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">Index</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> [ text, setText ] = <span class="title function_">useState</span>(<span class="string">&#x27;this is test&#x27;</span>);</span><br><span class="line">  <span class="keyword">const</span> <span class="title function_">reversal</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">    <span class="title function_">setText</span>(text.<span class="title function_">split</span>(<span class="string">&#x27;&#x27;</span>).<span class="title function_">reverse</span>().<span class="title function_">join</span>(<span class="string">&#x27;&#x27;</span>));</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">p</span> <span class="attr">onClick</span>=<span class="string">&#123;reversal&#125;</span>&gt;</span>&#123;text&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- vue --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span> @<span class="attr">click</span>=<span class="string">&quot;reversal&quot;</span>&gt;</span>&#123;&#123;text&#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  <span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></span><br><span class="line"><span class="language-javascript">    <span class="title function_">data</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">      <span class="keyword">return</span> &#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="attr">text</span>: <span class="string">&#x27;this is test&#x27;</span></span></span><br><span class="line"><span class="language-javascript">      &#125;</span></span><br><span class="line"><span class="language-javascript">    &#125;,</span></span><br><span class="line"><span class="language-javascript">    <span class="attr">methods</span>: &#123;</span></span><br><span class="line"><span class="language-javascript">      <span class="title function_">reversal</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="variable language_">this</span>.<span class="property">text</span> = <span class="variable language_">this</span>.<span class="property">text</span>.<span class="title function_">split</span>(<span class="string">&#x27;&#x27;</span>).<span class="title function_">reverse</span>().<span class="title function_">join</span>(<span class="string">&#x27;&#x27;</span>)</span></span><br><span class="line"><span class="language-javascript">      &#125;</span></span><br><span class="line"><span class="language-javascript">    &#125;</span></span><br><span class="line"><span class="language-javascript">  &#125;</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- vue3 组合式 API --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span> @<span class="attr">click</span>=<span class="string">&quot;reversal&quot;</span>&gt;</span>&#123;&#123;text&#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">setup</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  <span class="keyword">import</span> &#123; ref &#125; <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span></span></span><br><span class="line"><span class="language-javascript">  <span class="keyword">const</span> text = <span class="title function_">ref</span>(<span class="string">&#x27;this is test&#x27;</span>)</span></span><br><span class="line"><span class="language-javascript">  <span class="keyword">function</span> <span class="title function_">reversal</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">    text.<span class="property">value</span> = text.<span class="property">value</span>.<span class="title function_">split</span>(<span class="string">&#x27;&#x27;</span>).<span class="title function_">reverse</span>().<span class="title function_">join</span>(<span class="string">&#x27;&#x27;</span>)</span></span><br><span class="line"><span class="language-javascript">  &#125;</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="我的选择"><a href="#我的选择" class="headerlink" title="我的选择"></a>我的选择</h3><p>通过示例可以看出，在书写流畅上react有着绝对的优势，vue3的组合式api算是改进很多，比起之前的选项式看着要简洁不少。但模板代码跟js之间的切换、各种指令还是必不可少。也不是说vue不好，一些限制反而能降低代码的出错率，react的自由对新手来说确实更容易出错。不管怎么说vue和react并列为两大主流框架，看过尤大的一些视频，框架的开发本来就是平衡的技术，总得有所取舍，不可能尽善尽美。</p>
+<p><em>我个人更喜欢react的开发方式，但我还是会用vue做一些开发。</em></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%95"><span class="toc-number">1.</span> <span class="toc-text">引</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B"><span class="toc-number">2.</span> <span class="toc-text">示例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%88%91%E7%9A%84%E9%80%89%E6%8B%A9"><span class="toc-number">3.</span> <span class="toc-text">我的选择</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://sjywz.github.io/2022/06/01/%E6%B5%85%E5%B0%9Dvue%E4%B9%8B%E6%84%9F/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://sjywz.github.io/2022/06/01/%E6%B5%85%E5%B0%9Dvue%E4%B9%8B%E6%84%9F/&text=浅尝vue之感"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://sjywz.github.io/2022/06/01/%E6%B5%85%E5%B0%9Dvue%E4%B9%8B%E6%84%9F/&title=浅尝vue之感"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://sjywz.github.io/2022/06/01/%E6%B5%85%E5%B0%9Dvue%E4%B9%8B%E6%84%9F/&is_video=false&description=浅尝vue之感"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=浅尝vue之感&body=Check out this article: https://sjywz.github.io/2022/06/01/%E6%B5%85%E5%B0%9Dvue%E4%B9%8B%E6%84%9F/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://sjywz.github.io/2022/06/01/%E6%B5%85%E5%B0%9Dvue%E4%B9%8B%E6%84%9F/&title=浅尝vue之感"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://sjywz.github.io/2022/06/01/%E6%B5%85%E5%B0%9Dvue%E4%B9%8B%E6%84%9F/&title=浅尝vue之感"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://sjywz.github.io/2022/06/01/%E6%B5%85%E5%B0%9Dvue%E4%B9%8B%E6%84%9F/&title=浅尝vue之感"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://sjywz.github.io/2022/06/01/%E6%B5%85%E5%B0%9Dvue%E4%B9%8B%E6%84%9F/&title=浅尝vue之感"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://sjywz.github.io/2022/06/01/%E6%B5%85%E5%B0%9Dvue%E4%B9%8B%E6%84%9F/&name=浅尝vue之感&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://sjywz.github.io/2022/06/01/%E6%B5%85%E5%B0%9Dvue%E4%B9%8B%E6%84%9F/&t=浅尝vue之感"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <!-- <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a> -->
+        <!-- <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a> -->
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2019-2023
+    柳周侯爷
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+    <script type="text/javascript">
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?29d4400c26dd103d094ce85ff8b8e3c9";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>

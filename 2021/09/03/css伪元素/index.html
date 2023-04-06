@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="伪元素MDN的说明：伪元素是一个附加至选择器末的关键词，允许你对被选择元素的特定部分修改样式。 伪元素不像span&#x2F;p&#x2F;div之类的标签元素可以直接写于页面用作布局或显示，只能通过选择器操作，这就是伪元素的“伪”。它依附于其他已有元素，如果页面没有该元素，伪元素自然也就不生效。 另一方面伪元素一直存在于页面上的每个标签元素，只是没有显现出来，因此任何一个元素都能支持大部分的伪元">
+<meta property="og:type" content="article">
+<meta property="og:title" content="css伪元素">
+<meta property="og:url" content="https://sjywz.github.io/2021/09/03/css%E4%BC%AA%E5%85%83%E7%B4%A0/index.html">
+<meta property="og:site_name" content="一记">
+<meta property="og:description" content="伪元素MDN的说明：伪元素是一个附加至选择器末的关键词，允许你对被选择元素的特定部分修改样式。 伪元素不像span&#x2F;p&#x2F;div之类的标签元素可以直接写于页面用作布局或显示，只能通过选择器操作，这就是伪元素的“伪”。它依附于其他已有元素，如果页面没有该元素，伪元素自然也就不生效。 另一方面伪元素一直存在于页面上的每个标签元素，只是没有显现出来，因此任何一个元素都能支持大部分的伪元">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://cms.bcode.cc/uploads/medium_WX_20220601_144115_2x_43a9b59573.png">
+<meta property="og:image" content="http://cms.bcode.cc/uploads/medium_WX_20220601_144945_2x_8ad2785fde.png">
+<meta property="og:image" content="http://cms.bcode.cc/uploads/medium_WX_20220601_145131_2x_d4b1300686.png">
+<meta property="article:published_time" content="2021-09-03T11:12:07.000Z">
+<meta property="article:modified_time" content="2023-04-06T15:10:52.012Z">
+<meta property="article:author" content="柳周侯爷">
+<meta property="article:tag" content="css">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://cms.bcode.cc/uploads/medium_WX_20220601_144115_2x_43a9b59573.png">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>css伪元素</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 7.0.0-rc1"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2022/06/01/%E6%B5%85%E5%B0%9Dvue%E4%B9%8B%E6%84%9F/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2020/09/17/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A870-%E5%8E%9F%E5%88%99%E5%81%9C%E6%AD%A2%E6%8B%96%E5%BB%B6/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <!-- <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li> -->
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://sjywz.github.io/2021/09/03/css%E4%BC%AA%E5%85%83%E7%B4%A0/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://sjywz.github.io/2021/09/03/css%E4%BC%AA%E5%85%83%E7%B4%A0/&text=css伪元素"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://sjywz.github.io/2021/09/03/css%E4%BC%AA%E5%85%83%E7%B4%A0/&title=css伪元素"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://sjywz.github.io/2021/09/03/css%E4%BC%AA%E5%85%83%E7%B4%A0/&is_video=false&description=css伪元素"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=css伪元素&body=Check out this article: https://sjywz.github.io/2021/09/03/css%E4%BC%AA%E5%85%83%E7%B4%A0/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://sjywz.github.io/2021/09/03/css%E4%BC%AA%E5%85%83%E7%B4%A0/&title=css伪元素"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://sjywz.github.io/2021/09/03/css%E4%BC%AA%E5%85%83%E7%B4%A0/&title=css伪元素"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://sjywz.github.io/2021/09/03/css%E4%BC%AA%E5%85%83%E7%B4%A0/&title=css伪元素"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://sjywz.github.io/2021/09/03/css%E4%BC%AA%E5%85%83%E7%B4%A0/&title=css伪元素"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://sjywz.github.io/2021/09/03/css%E4%BC%AA%E5%85%83%E7%B4%A0/&name=css伪元素&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://sjywz.github.io/2021/09/03/css%E4%BC%AA%E5%85%83%E7%B4%A0/&t=css伪元素"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%AA%E5%85%83%E7%B4%A0"><span class="toc-number">1.</span> <span class="toc-text">伪元素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#before%E5%92%8C-after"><span class="toc-number">2.</span> <span class="toc-text">::before和::after</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#first-line%E5%92%8C-first-letter"><span class="toc-number">3.</span> <span class="toc-text">::first-line和::first-letter</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#selection"><span class="toc-number">4.</span> <span class="toc-text">::selection</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#placeholder"><span class="toc-number">5.</span> <span class="toc-text">::placeholder</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B"><span class="toc-number">5.1.</span> <span class="toc-text">示例</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        css伪元素
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">一记</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2021-09-03T11:12:07.000Z" itemprop="datePublished">2021-09-03</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/css/" rel="tag">css</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h3 id="伪元素"><a href="#伪元素" class="headerlink" title="伪元素"></a>伪元素</h3><p>MDN的说明：<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/Pseudo-elements">伪元素是一个附加至选择器末的关键词，允许你对被选择元素的特定部分修改样式。</a></p>
+<p>伪元素不像span&#x2F;p&#x2F;div之类的标签元素可以直接写于页面用作布局或显示，只能通过选择器操作，这就是伪元素的“伪”。它依附于其他已有元素，如果页面没有该元素，伪元素自然也就不生效。 另一方面伪元素一直存在于页面上的每个标签元素，只是没有显现出来，因此任何一个元素都能支持大部分的伪元素选择，某些伪元素只能用作块级元素，也可以通过修改元素display实现。</p>
+<blockquote>
+<p>注：按照规范，应该使用双冒号（::）而不是单个冒号（:），以便区分伪类和伪元素。但是，由于旧版本的 W3C 规范并未对此进行特别区分，因此目前绝大多数的浏览器都同时支持使用这两种方式来表示伪元素。</p>
+</blockquote>
+<h3 id="before和-after"><a href="#before和-after" class="headerlink" title="::before和::after"></a>::before和::after</h3><p>通常伪元素::before和::after是使用最多的两个伪元素。这两个作用相同，只是一个是在被选元素之前一个是在之后，但显示在页面上的前后可以通过css调整，完全可以让<code>::after</code>显示在前<code>::before</code>显示在后。通过指定css<code>content</code>属性就可以显示出来，即使伪元素没有任何内容也需添加<code>content:&#39;&#39;</code>，否则伪元素不显示。一般会伴随设置选择元素相对定位，伪元素绝对定位用作布局展示只用。</p>
+<h3 id="first-line和-first-letter"><a href="#first-line和-first-letter" class="headerlink" title="::first-line和::first-letter"></a>::first-line和::first-letter</h3><p>::first-line 选择容器元素内（块级元素）第一行，第一行的内容受设备宽度、元素宽度、字体大小影响而不同；<br>::first-letter 选择容器元素内（块级元素）第一个字，通常用于英文首字母大写或新闻段落提醒。</p>
+<h3 id="selection"><a href="#selection" class="headerlink" title="::selection"></a>::selection</h3><p>::selection 选择用户选中内容，通常用于设置用户选中内容的高亮。</p>
+<h3 id="placeholder"><a href="#placeholder" class="headerlink" title="::placeholder"></a>::placeholder</h3><p>::placeholder 可以选择input占位文本，设置占位文本样式。</p>
+<p>还有一些其他不常用的伪元素，就不一一列出了。点此查看<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/Pseudo-elements#%E6%A0%87%E5%87%86%E4%BC%AA%E5%85%83%E7%B4%A0%E7%B4%A2%E5%BC%95">标准伪元素</a></p>
+<h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css"><span class="selector-class">.p</span><span class="selector-pseudo">::before</span>&#123;</span></span><br><span class="line"><span class="language-css">  <span class="attribute">content</span>: <span class="string">&#x27;♥&#x27;</span>;</span></span><br><span class="line"><span class="language-css">&#125;</span></span><br><span class="line"><span class="language-css"><span class="selector-class">.p</span><span class="selector-pseudo">::after</span>&#123;</span></span><br><span class="line"><span class="language-css">  <span class="attribute">content</span>: <span class="string">&#x27;♥&#x27;</span>;</span></span><br><span class="line"><span class="language-css">&#125;</span></span><br><span class="line"><span class="language-css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">&quot;p&quot;</span>&gt;</span>hello word<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="http://cms.bcode.cc/uploads/medium_WX_20220601_144115_2x_43a9b59573.png" alt="img"></p>
+<hr>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 添加`::first-line` */</span></span><br><span class="line"><span class="selector-class">.p</span><span class="selector-pseudo">::first-line</span>&#123;</span><br><span class="line">  <span class="attribute">color</span>: white;</span><br><span class="line">  <span class="attribute">background-color</span>: black;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://cms.bcode.cc/uploads/medium_WX_20220601_144945_2x_8ad2785fde.png" alt="img"></p>
+<hr>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 添加`::first-line` */</span></span><br><span class="line"><span class="selector-class">.p</span><span class="selector-pseudo">::first-letter</span>&#123;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">35px</span>;</span><br><span class="line">  <span class="attribute">color</span>: red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://cms.bcode.cc/uploads/medium_WX_20220601_145131_2x_d4b1300686.png" alt="img"></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%AA%E5%85%83%E7%B4%A0"><span class="toc-number">1.</span> <span class="toc-text">伪元素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#before%E5%92%8C-after"><span class="toc-number">2.</span> <span class="toc-text">::before和::after</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#first-line%E5%92%8C-first-letter"><span class="toc-number">3.</span> <span class="toc-text">::first-line和::first-letter</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#selection"><span class="toc-number">4.</span> <span class="toc-text">::selection</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#placeholder"><span class="toc-number">5.</span> <span class="toc-text">::placeholder</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B"><span class="toc-number">5.1.</span> <span class="toc-text">示例</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://sjywz.github.io/2021/09/03/css%E4%BC%AA%E5%85%83%E7%B4%A0/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://sjywz.github.io/2021/09/03/css%E4%BC%AA%E5%85%83%E7%B4%A0/&text=css伪元素"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://sjywz.github.io/2021/09/03/css%E4%BC%AA%E5%85%83%E7%B4%A0/&title=css伪元素"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://sjywz.github.io/2021/09/03/css%E4%BC%AA%E5%85%83%E7%B4%A0/&is_video=false&description=css伪元素"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=css伪元素&body=Check out this article: https://sjywz.github.io/2021/09/03/css%E4%BC%AA%E5%85%83%E7%B4%A0/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://sjywz.github.io/2021/09/03/css%E4%BC%AA%E5%85%83%E7%B4%A0/&title=css伪元素"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://sjywz.github.io/2021/09/03/css%E4%BC%AA%E5%85%83%E7%B4%A0/&title=css伪元素"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://sjywz.github.io/2021/09/03/css%E4%BC%AA%E5%85%83%E7%B4%A0/&title=css伪元素"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://sjywz.github.io/2021/09/03/css%E4%BC%AA%E5%85%83%E7%B4%A0/&title=css伪元素"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://sjywz.github.io/2021/09/03/css%E4%BC%AA%E5%85%83%E7%B4%A0/&name=css伪元素&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://sjywz.github.io/2021/09/03/css%E4%BC%AA%E5%85%83%E7%B4%A0/&t=css伪元素"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <!-- <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a> -->
+        <!-- <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a> -->
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2019-2023
+    柳周侯爷
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+    <script type="text/javascript">
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?29d4400c26dd103d094ce85ff8b8e3c9";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>
