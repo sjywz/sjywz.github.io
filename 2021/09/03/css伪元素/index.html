@@ -13,15 +13,15 @@
 <meta property="og:site_name" content="一记">
 <meta property="og:description" content="伪元素MDN的说明：伪元素是一个附加至选择器末的关键词，允许你对被选择元素的特定部分修改样式。 伪元素不像span&#x2F;p&#x2F;div之类的标签元素可以直接写于页面用作布局或显示，只能通过选择器操作，这就是伪元素的“伪”。它依附于其他已有元素，如果页面没有该元素，伪元素自然也就不生效。 另一方面伪元素一直存在于页面上的每个标签元素，只是没有显现出来，因此任何一个元素都能支持大部分的伪元">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://cms.bcode.cc/uploads/medium_WX_20220601_144115_2x_43a9b59573.png">
-<meta property="og:image" content="http://cms.bcode.cc/uploads/medium_WX_20220601_144945_2x_8ad2785fde.png">
-<meta property="og:image" content="http://cms.bcode.cc/uploads/medium_WX_20220601_145131_2x_d4b1300686.png">
+<meta property="og:image" content="https://sjywz.github.io/assets/img/css-1.png">
+<meta property="og:image" content="https://sjywz.github.io/assets/img/css-2.png">
+<meta property="og:image" content="https://sjywz.github.io/assets/img/css-3.png">
 <meta property="article:published_time" content="2021-09-03T11:12:07.000Z">
-<meta property="article:modified_time" content="2023-04-06T15:10:52.012Z">
+<meta property="article:modified_time" content="2025-04-24T03:02:28.850Z">
 <meta property="article:author" content="柳周侯爷">
 <meta property="article:tag" content="css">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://cms.bcode.cc/uploads/medium_WX_20220601_144115_2x_43a9b59573.png">
+<meta name="twitter:image" content="https://sjywz.github.io/assets/img/css-1.png">
     
     
         
@@ -55,7 +55,7 @@
     <!-- rss -->
     
     
-<meta name="generator" content="Hexo 7.0.0-rc1"></head>
+<meta name="generator" content="Hexo 7.3.0"></head>
 
 <body class="max-width mx-auto px3 ltr">
     
@@ -166,15 +166,15 @@
 <p>还有一些其他不常用的伪元素，就不一一列出了。点此查看<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/Pseudo-elements#%E6%A0%87%E5%87%86%E4%BC%AA%E5%85%83%E7%B4%A0%E7%B4%A2%E5%BC%95">标准伪元素</a></p>
 <h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css"><span class="selector-class">.p</span><span class="selector-pseudo">::before</span>&#123;</span></span><br><span class="line"><span class="language-css">  <span class="attribute">content</span>: <span class="string">&#x27;♥&#x27;</span>;</span></span><br><span class="line"><span class="language-css">&#125;</span></span><br><span class="line"><span class="language-css"><span class="selector-class">.p</span><span class="selector-pseudo">::after</span>&#123;</span></span><br><span class="line"><span class="language-css">  <span class="attribute">content</span>: <span class="string">&#x27;♥&#x27;</span>;</span></span><br><span class="line"><span class="language-css">&#125;</span></span><br><span class="line"><span class="language-css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">&quot;p&quot;</span>&gt;</span>hello word<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p><img src="http://cms.bcode.cc/uploads/medium_WX_20220601_144115_2x_43a9b59573.png" alt="img"></p>
+<p><img src="/../assets/img/css-1.png" alt="img"></p>
 <hr>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 添加`::first-line` */</span></span><br><span class="line"><span class="selector-class">.p</span><span class="selector-pseudo">::first-line</span>&#123;</span><br><span class="line">  <span class="attribute">color</span>: white;</span><br><span class="line">  <span class="attribute">background-color</span>: black;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p><img src="http://cms.bcode.cc/uploads/medium_WX_20220601_144945_2x_8ad2785fde.png" alt="img"></p>
+<p><img src="/../assets/img/css-2.png" alt="img"></p>
 <hr>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 添加`::first-line` */</span></span><br><span class="line"><span class="selector-class">.p</span><span class="selector-pseudo">::first-letter</span>&#123;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">35px</span>;</span><br><span class="line">  <span class="attribute">color</span>: red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p><img src="http://cms.bcode.cc/uploads/medium_WX_20220601_145131_2x_d4b1300686.png" alt="img"></p>
+<p><img src="/../assets/img/css-3.png" alt="img"></p>
 
   </div>
 </article>
@@ -234,7 +234,7 @@
     Copyright &copy;
     
     
-    2019-2023
+    2019-2025
     柳周侯爷
   </div>
   <div class="footer-right">
