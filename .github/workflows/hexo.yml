@@ -27,7 +27,7 @@ jobs:
         npm -v
 
     - name: Cache node modules
-      uses: actions/cache@v4
+      uses: actions/cache@v6
       id: cache
       with:
         path: node_modules
